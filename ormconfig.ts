@@ -9,5 +9,5 @@ export default new DataSource({
   database: 'food_ordering',
   entities: ['dist/**/*.entity.js'],
   migrations: ['dist/migrations/*.js'],
-  synchronize: false,
+  synchronize: true, // Set to false in production
 });

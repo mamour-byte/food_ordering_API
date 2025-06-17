@@ -33,6 +33,9 @@ export class AuthService {
     phoneNumber?: string;
     role: UserRole;
   }) {
+
+    // console.log('Données reçues dans register:', data);
+
     const existing = await this.usersService.findByEmail(data.email);
     if (existing) {
       throw new UnauthorizedException('Email déjà utilisé');

@@ -1,4 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Restaurant } from 'src/restaurants/restaurant.entity';
+import { OneToMany } from 'typeorm';
 
 export enum UserRole {
   CLIENT = 'client',
@@ -11,6 +13,9 @@ export enum UserRole {
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @OneToMany(() => Restaurant, restaurant => restaurant.owner)
+  restaurants: Restaurant[];
 
   @Column()
   name: string;

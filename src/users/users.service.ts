@@ -11,8 +11,12 @@ export class UsersService {
   ) {}
 
   async findByEmail(email: string): Promise<User | null> {
-  return this.userRepository.findOne({ where: { email } });
-    }
+    console.log('Recherche par email:', email);
+    const user = await this.userRepository.findOne({ where: { email } });
+    console.log('Utilisateur trouvé:', user);
+    return user;
+  }
+
 
 
   async create(data: Partial<User>): Promise<User> {

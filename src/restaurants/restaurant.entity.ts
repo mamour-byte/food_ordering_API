@@ -9,6 +9,9 @@ export class Restaurant {
   @Column()
   name: string;
 
+  @ManyToOne(() => User, user => user.restaurants, { eager: false })
+  owner: User;
+
   @Column({ nullable: true })
   description: string;
 
@@ -32,9 +35,6 @@ export class Restaurant {
 
   @Column({ default: true })
   isOpen: boolean;
-
-  @ManyToOne(() => User)
-  owner: User;
 
   @CreateDateColumn()
   createdAt: Date;

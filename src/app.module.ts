@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from './users/users.module';
 import { RestaurantsModule } from './restaurants/restaurants.module';
 import { CategoriesModule } from './categories/categories.module';
 import { MealsModule } from './meals/meals.module';
@@ -17,8 +18,9 @@ import { AuthModule } from './auth/auth.module';
       password: 'Papou2212',
       database: 'food_ordering',
       autoLoadEntities: true,
-      synchronize: false, // false pour production
+      synchronize: true,
     }),
+    UsersModule, 
     RestaurantsModule,
     CategoriesModule,
     MealsModule,

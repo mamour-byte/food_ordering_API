@@ -25,7 +25,7 @@ export class RestaurantsController {
   constructor(private readonly restaurantService: RestaurantsService) {}
 
   @Post()
-  @Roles('restaurant') // Seul un user restaurant peut en créer un
+  @Roles('restaurant') 
   create(
     @Body() createDto: CreateRestaurantDto,
     @CurrentUser() user: User,
@@ -58,4 +58,21 @@ export class RestaurantsController {
   remove(@Param('id') id: string, @CurrentUser() user: User) {
     return this.restaurantService.remove(+id, user);
   }
+
+  @Get()
+  findAllPaginated(
+    @Param('page') page: number = 1,
+    @Param('limit') limit: number = 10,
+  ) { 
+    return this.restaurantService.findAllPaginated(page, limit);
+  }
+
+
+  @Get('/my')
+  @Roles('restaurant')
+  findMyRestaurants(@CurrentUser() user: User) {
+    return this.restaurantService.findByOwner(user.id);
+  }
+
+
 }

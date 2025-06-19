@@ -25,8 +25,9 @@ export class Meal {
   @ManyToOne(() => Restaurant, { onDelete: 'CASCADE' })
   restaurant: Restaurant;
 
-  @ManyToOne(() => Category, { onDelete: 'SET NULL', nullable: true })
-  category: Category;
+  @ManyToOne(() => Category, { nullable: true })
+  category?: Category | null;
+
 
   @CreateDateColumn()
   createdAt: Date;

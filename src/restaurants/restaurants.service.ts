@@ -61,4 +61,22 @@ export class RestaurantsService {
 
     await this.restaurantRepository.remove(restaurant);
   }
+
+  async findByOwner(userId: number): Promise<Restaurant[]> {
+    return this.restaurantRepository.find({
+      where: { owner: { id: userId } },
+      relations: ['owner'],
+    });
+  }
+
+  async findAllPaginated(page: number = 1, limit: number = 10): Promise<{ data: Restaurant[]; total: number }> {
+    const [data, total] = await this.restaurantRepository.findAndCount({
+      skip: (page - 1) * limit,
+      take: limit,
+      relations: ['owner'],
+    });
+
+    return { data, total };
+  }
+
 }
